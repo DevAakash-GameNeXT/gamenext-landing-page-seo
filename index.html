@@ -213,7 +213,6 @@
     </div>
   </header>
 
-
   <div class="container">
     <h2 class="headline">Fill Out the Form and Grab Your FREE SEO Tool</h2>
 
@@ -254,14 +253,11 @@
 
     // JavaScript for form submission
     async function submitForm() {
-      // Get values from input fields
       const name = document.getElementById('name').value;
       const phone = document.getElementById('phone').value;
       const business = document.getElementById('business').value;
 
-      // Basic validation
       if (!name || !phone || !business) {
-        // Use a simple message box instead of alert
         const messageBox = document.createElement('div');
         messageBox.style.cssText = `
           position: fixed;
@@ -278,26 +274,47 @@
         `;
         messageBox.textContent = 'Please fill in all fields!';
         document.body.appendChild(messageBox);
-        setTimeout(() => messageBox.remove(), 3000); // Remove after 3 seconds
+        setTimeout(() => messageBox.remove(), 3000);
         return;
       }
 
       const data = { name, phone, business };
-      // Google Apps Script Webhook URL (replace with your actual URL)
-      const webhookUrl = "https://script.google.com/macros/s/AKfycbxHv2KsR5keAMamf26MhvLgfaJ9NnI7xs1y7BMJKcUqfCPwAwk3BY7g7s4SBlS4Xi0w/exec";
+      const webhookUrl = 'https://script.google.com/macros/s/AKfycbz1ZrTZ2Xi1YwhsJSYuQ0kR4gabb5OpxejMjTkB3BxZHmJs0Xj9SaSRNzRps_EVoTiL/exec';
+
       try {
-        // Send data to the webhook
-        await fetch(webhookUrl, {
+        const response = await fetch(webhookUrl, {
           method: 'POST',
-          mode: 'no-cors', // Use 'no-cors' for Google Apps Script webhooks
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-        // Redirect to desired link after successful submission (replace with your URL)
-        window.location.href = "https://drive.google.com/drive/folders/1FmmE-Lz73UYUNscVsjFwAu15g2L_da61?usp=sharing"; // Replace with the actual redirect URL
+
+        const result = await response.json();
+        if (result.status === 'success') {
+          const messageBox = document.createElement('div');
+          messageBox.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00d4ff;
+            color: #0a1a2e;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-family: Arial, sans-serif;
+          `;
+          messageBox.textContent = 'Form submitted successfully! Redirecting...';
+          document.body.appendChild(messageBox);
+          setTimeout(() => {
+            messageBox.remove();
+            window.location.href = 'https://drive.google.com/drive/folders/1FmmE-Lz73UYUNscVsjFwAu15g2L_da61?usp=sharing';
+          }, 2000);
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
       } catch (error) {
         console.error('Error submitting form:', error);
-        // Show an error message in a message box
         const messageBox = document.createElement('div');
         messageBox.style.cssText = `
           position: fixed;
@@ -314,7 +331,7 @@
         `;
         messageBox.textContent = 'There was an error submitting the form.';
         document.body.appendChild(messageBox);
-        setTimeout(() => messageBox.remove(), 3000); // Remove after 3 seconds
+        setTimeout(() => messageBox.remove(), 3000);
       }
     }
   </script>
