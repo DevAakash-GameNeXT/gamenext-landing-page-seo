@@ -284,8 +284,7 @@
 
       const data = { name, phone, business };
       // Google Apps Script Webhook URL (replace with your actual URL)
-      const webhookUrl = 'https://script.google.com/macros/s/AKfycbx9aMOR9YF58ZYMBWgG1YftoKqKwzpWrvq6aszuyH_dUDHn0Yc-vcJPx-wYix9teCLi/exec';
-
+      const webhookUrl = "https://script.google.com/macros/s/AKfycbxHv2KsR5keAMamf26MhvLgfaJ9NnI7xs1y7BMJKcUqfCPwAwk3BY7g7s4SBlS4Xi0w/exec";
       try {
         // Send data to the webhook
         await fetch(webhookUrl, {
@@ -295,7 +294,7 @@
           body: JSON.stringify(data)
         });
         // Redirect to desired link after successful submission (replace with your URL)
-        window.location.href = 'https://drive.google.com/drive/folders/1FmmE-Lz73UYUNscVsjFwAu15g2L_da61?usp=sharing'; // Replace with the actual redirect URL
+        window.location.href = "https://drive.google.com/drive/folders/1FmmE-Lz73UYUNscVsjFwAu15g2L_da61?usp=sharing"; // Replace with the actual redirect URL
       } catch (error) {
         console.error('Error submitting form:', error);
         // Show an error message in a message box
