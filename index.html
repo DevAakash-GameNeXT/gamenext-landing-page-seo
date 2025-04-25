@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameNext - Free SEO Tool</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    /* Basic reset and body styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a1a2e, #1e3a5f); /* Gradient background */
+      color: #fff; /* White text color */
+      overflow-x: hidden; /* Hide horizontal scrollbar */
+      min-height: 100vh; /* Full viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem; /* Padding around content */
+    }
+
+    /* Header styling */
+    header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2rem; /* Add some space below the header */
+    }
+
+    /* Container for main content */
+    .container {
+      text-align: center;
+      position: relative;
+      z-index: 1; /* Ensure content is above particles */
+      animation: float 3s ease-in-out infinite; /* Floating animation */
+      max-width: 600px; /* Maximum width */
+      width: 100%; /* Full width on smaller screens */
+    }
+
+    /* Floating animation keyframes */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Logo container styling */
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Removed margin-bottom here as it's now part of the header margin */
+    }
+
+    /* Styling for the "GAMENEXT" text logo */
+    .logo {
+      font-size: 3.5rem; /* Large font size */
+      font-weight: bold;
+      color: #00d4ff; /* Blue text color */
+      text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; /* Blue text shadow for glow */
+      animation: glow 2s ease-in-out infinite; /* Glowing animation */
+      /* Removed margin-top as the triangle is gone */
+    }
+
+    /* Glowing animation keyframes for logo */
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+      50% { text-shadow: 0 0 40px #00d4ff, 0 0 50px #00d4ff; }
+    }
+
+    /* Headline styling */
+    .headline {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      animation: fadeIn 1.5s ease-out; /* Fade-in animation */
+    }
+
+    /* Fade-in animation keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Form container styling */
+    .form-container {
+      background: rgba(255, 255, 255, 0.15); /* Semi-transparent white background */
+      padding: 2rem;
+      border-radius: 15px; /* Rounded corners */
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); /* Blue shadow */
+      animation: slideIn 1s ease-out; /* Slide-in animation */
+    }
+
+    /* Slide-in animation keyframes */
+    @keyframes slideIn {
+      from { transform: translateY(80px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Styling for input fields and textarea */
+    input, textarea {
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.25); /* Semi-transparent background */
+      color: #fff; /* White text */
+      font-size: 1rem;
+      transition: transform 0.3s ease; /* Smooth transition on focus */
+    }
+
+    textarea {
+      resize: none; /* Prevent resizing */
+      height: 80px;
+    }
+
+    /* Styling for input and textarea on focus */
+    input:focus, textarea:focus {
+      outline: none;
+      transform: scale(1.03); /* Slightly enlarge on focus */
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6); /* Blue shadow on focus */
+    }
+
+    /* Placeholder text color */
+    input::placeholder, textarea::placeholder {
+      color: #b0e7ff;
+      opacity: 0.8;
+    }
+
+    /* Button styling */
+    button {
+      padding: 0.8rem 2rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #00d4ff; /* Blue background */
+      color: #0a1a2e; /* Dark text color */
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+      box-shadow: 0 0 15px #00d4ff, 0 0 25px #00d4ff; /* Blue shadow */
+      animation: buttonGlow 2s ease-in-out infinite; /* Button glowing animation */
+    }
+
+    /* Button glowing animation keyframes */
+    @keyframes buttonGlow {
+      0%, 100% { box-shadow: 0 0 15px #00d4ff, 0 0 25px #00d4ff; }
+      50% { box-shadow: 0 0 30px #00d4ff, 0 0 40px #00d4ff; }
+    }
+
+    /* Button hover effect */
+    button:hover {
+      transform: scale(1.08); /* Slightly enlarge on hover */
+      box-shadow: 0 0 30px #00d4ff, 0 0 50px #00d4ff; /* Increased shadow on hover */
+    }
+
+    /* Promo section styling */
+    .promo-section {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #00d4ff; /* Blue text color */
+      animation: fadeIn 2s ease-out; /* Fade-in animation */
+    }
+
+    .promo-section p {
+      margin: 0.5rem 0;
+    }
+
+    .promo-section .tagline {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); /* Text shadow for tagline */
+    }
+
+    /* Particles container */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Allow clicks to pass through */
+    }
+
+    /* Individual particle styling */
+    .particle {
+      position: absolute;
+      background: rgba(0, 212, 255, 0.4); /* Semi-transparent blue background */
+      border-radius: 50%; /* Circular shape */
+      animation: move 5s infinite ease-in-out; /* Particle movement animation */
+    }
+
+    /* Particle movement animation keyframes */
+    @keyframes move {
+      0% { transform: translate(0, 0); opacity: 1; }
+      100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <header>
+    <div class="logo-container">
+      <h1 class="logo">GAMENEXT</h1>
+    </div>
+  </header>
+
+
+  <div class="container">
+    <h2 class="headline">Fill Out the Form and Grab Your FREE SEO Tool</h2>
+
+    <div class="form-container">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <textarea id="business" placeholder="What business you do (and its description)" required></textarea>
+      <button onclick="submitForm()">Get My Free Tool</button>
+    </div>
+  </div>
+
+  <div class="promo-section">
+    <p>Powered by</p>
+    <p class="tagline">GameNeXT - AI Automation Agency</p>
+    <p>We Will Make You Ahead with AI Automations</p>
+  </div>
+
+  <script>
+    // JavaScript for particle animation
+    const particlesContainer = document.getElementById('particles');
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 8 + 4; // Random size for particles
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`; // Random horizontal position
+      particle.style.top = `${Math.random() * 100}%`; // Random vertical position
+      // Set random movement distances using CSS variables
+      particle.style.setProperty('--x', `${(Math.random() - 0.5) * 400}px`);
+      particle.style.setProperty('--y', `${(Math.random() - 0.5) * 400}px`);
+      particlesContainer.appendChild(particle);
+      // Remove particle after animation completes (5 seconds)
+      setTimeout(() => particle.remove(), 5000);
+    }
+    // Create a new particle every 300 milliseconds
+    setInterval(createParticle, 300);
+
+    // JavaScript for form submission
+    async function submitForm() {
+      // Get values from input fields
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const business = document.getElementById('business').value;
+
+      // Basic validation
+      if (!name || !phone || !business) {
+        // Use a simple message box instead of alert
+        const messageBox = document.createElement('div');
+        messageBox.style.cssText = `
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #ff4d4d;
+          color: white;
+          padding: 15px;
+          border-radius: 8px;
+          z-index: 1000;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          font-family: Arial, sans-serif;
+        `;
+        messageBox.textContent = 'Please fill in all fields!';
+        document.body.appendChild(messageBox);
+        setTimeout(() => messageBox.remove(), 3000); // Remove after 3 seconds
+        return;
+      }
+
+      const data = { name, phone, business };
+      // Google Apps Script Webhook URL (replace with your actual URL)
+      const webhookUrl = "https://script.google.com/macros/s/AKfycbxHv2KsR5keAMamf26MhvLgfaJ9NnI7xs1y7BMJKcUqfCPwAwk3BY7g7s4SBlS4Xi0w/exec";
+      try {
+        // Send data to the webhook
+        await fetch(webhookUrl, {
+          method: 'POST',
+          mode: 'no-cors', // Use 'no-cors' for Google Apps Script webhooks
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        // Redirect to desired link after successful submission (replace with your URL)
+        window.location.href = "https://drive.google.com/drive/folders/1FmmE-Lz73UYUNscVsjFwAu15g2L_da61?usp=sharing"; // Replace with the actual redirect URL
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        // Show an error message in a message box
+        const messageBox = document.createElement('div');
+        messageBox.style.cssText = `
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #ff4d4d;
+          color: white;
+          padding: 15px;
+          border-radius: 8px;
+          z-index: 1000;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          font-family: Arial, sans-serif;
+        `;
+        messageBox.textContent = 'There was an error submitting the form.';
+        document.body.appendChild(messageBox);
+        setTimeout(() => messageBox.remove(), 3000); // Remove after 3 seconds
+      }
+    }
+  </script>
+</body>
+</html>
